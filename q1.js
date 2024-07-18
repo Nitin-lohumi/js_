@@ -76,9 +76,12 @@ class linkedlist {
     }
     printList() {
         var curr = this.head;
-        console.log(curr.elements);
-        console.log(curr.next.elements);
-    
+        var str = "";
+        while (curr) {
+            str += curr.elements + " ";
+            curr = curr.next;
+        }
+        console.log(str);
     }
 }
 let linklist = new linkedlist();
