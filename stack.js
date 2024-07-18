@@ -6,11 +6,11 @@ class stack {
          this.arr.push(elements);
     }
     pop(){
-        if(this.arr.length==0){
-            return "underflow";
 
+        if(this.arr.length==0){
+            return console.log("underflow");
         }
-        console.log("item is poped");
+        console.log( "the item "+ this.arr[this.arr.length-1],"deleted or poped");
       return  this.arr.pop();
     }
     peek(){
@@ -18,10 +18,8 @@ class stack {
     }
     printStack()
     {
-        let str = "";
         for (let i = this.arr.length-1; i>=0; i--)
-            str += this.arr[i] + " ";
-        return str;
+           console.log(this.arr[i]);
     }
     
 }
@@ -31,5 +29,4 @@ a.push(20);
 a.push(30);
 a.pop();
 console.log(a.peek());
-
-console.log(a.printStack());
+a.printStack();
