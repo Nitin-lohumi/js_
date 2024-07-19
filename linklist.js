@@ -9,7 +9,7 @@ class linkedlist {
         this.head = null;
         this.size =0;
     }
-    createlinkedlist(elements){
+    add(elements){
         let node = new Node(elements);
         let current;
         if(this.head==null){
@@ -26,7 +26,7 @@ class linkedlist {
     }
     insertAt(elements,index){
         if(index<0||index>this.size){
-            return "this is overflow or under flow sitution";
+            return console.log("this is overflow or under flow sitution");
         }
         else{
             let node  = new Node(elements);
@@ -85,8 +85,8 @@ class linkedlist {
     }
 }
 let linklist = new linkedlist();
-linklist.createlinkedlist(10);
-linklist.createlinkedlist(20);
+linklist.add(10);
+linklist.add(20);
 linklist.insertAt(100,1);
 linklist.remove(0);
 console.log(linklist.printList());
