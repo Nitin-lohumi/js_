@@ -1,20 +1,14 @@
-let str = '0000111111';
-const SmallestString = () => {
-    let stringStore;
-   for(let i=0; i<str.length-1;i++){
-     if(str[i]==1){
-        if(str[i+1]==0){
-            stringStore = str.slice(i+1,str.length);
-        }
-     }
+let nums = [1,1,2];
+var removeDuplicates = function (nums) {
+  let index = 1;
+  for (let i = 1; i < nums.length; i++) {
+    if(nums[i]!==nums[i-1]){
+        nums[index] = nums[i];
+        index++;
+        nums.pop();
     }
-    return stringStore?stringStore:str;
-}
-console.log(SmallestString());
-
-
-
-
-
-
-
+  }
+  console.log(nums);
+  return index;
+};
+console.log(removeDuplicates(nums));
