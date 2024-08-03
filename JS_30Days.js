@@ -1,14 +1,9 @@
-let nums = [1,1,2];
-var removeDuplicates = function (nums) {
-  let index = 1;
-  for (let i = 1; i < nums.length; i++) {
-    if(nums[i]!==nums[i-1]){
-        nums[index] = nums[i];
-        index++;
-        nums.pop();
-    }
-  }
-  console.log(nums);
-  return index;
+
+var argumentsLength = function(...args) {
+    //  while(arguments<args.length){
+    //     arguments++;
+    //  }
+    //  return arguments;
+    return args.length;
 };
-console.log(removeDuplicates(nums));
+console.log(argumentsLength("3"));
