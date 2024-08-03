@@ -1,19 +1,20 @@
-let arr=[1,2,3];
-function plusone(n,i){
-    if(i){
-        return n+i;
+let str = '0000111111';
+const SmallestString = () => {
+    let stringStore;
+   for(let i=0; i<str.length-1;i++){
+     if(str[i]==1){
+        if(str[i+1]==0){
+            stringStore = str.slice(i+1,str.length);
+        }
+     }
     }
-    if(n){
-        return n+1;
-    }
-
+    return stringStore?stringStore:str;
 }
+console.log(SmallestString());
 
-var map = function(arr, fn) {
-    let returnedArray=new Array();
-    arr.forEach((element,index) => {
-        returnedArray[index] = fn(arr[index]);
-        console.log(returnedArray[index]);
-    });
-};
-map(arr,plusone);
+
+
+
+
+
+
