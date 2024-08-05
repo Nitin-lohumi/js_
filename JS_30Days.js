@@ -1,29 +1,31 @@
-
-
-function memoize(fn) {
-    let cache={};
-    return function(...args) {
-        const key  = args;
-        console.log(key);
-          if(key in cache){
-            return cache[key];
-          }
-          cache[key] = fn(...args);
-          console.log(cache);
-          return cache[key];
-
-        }
-
-}
-
-
-let callCount = 0;
- const memoizedFn = memoize(function (a, b) {
-    	 callCount += 1;
-       return a + b;
-
- })
-console.log(memoizedFn(2, 2)); // 5
-console.log(memoizedFn(1, 2)); //5 
- console.log(callCount);
-
+/**
+ * @param {Function} fn
+ * @param {Array} args
+ * @param {number} t
+ * @return {Function}
+ */
+var cancellable = function(fn, args, t) {
+  fn(...args);
+   const cancelFn = ()=> clearInterval(Timer);
+    const Timer =  setInterval(()=>{
+      fn(...args) },t);
+    return cancelFn;
+};
+  const result = [];
+   const fn = (x) => x * 2;
+   const args = [4], t = 35, cancelTimeMs = 190;
+ 
+   const start = performance.now();
+ 
+   const log = (...argsArr) => {
+       const diff = Math.floor(performance.now() - start);
+       result.push({"time": diff, "returned": fn(...argsArr)});
+   }
+        
+   const cancel = cancellable(log, args, t);
+ 
+   setTimeout(cancel, cancelTimeMs);
+    
+   setTimeout(() => {
+       console.log(result); 
+ }, cancelTimeMs + t + 15)    
