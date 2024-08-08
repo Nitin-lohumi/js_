@@ -1,64 +1,72 @@
-class TimeLimitedCache {
-  constructor() {
-    this.cache = {};
-    setTimeout(()=>{
-       console.log("after five seconds the object is empty");
-       console.log(this.cache);
-    },5000);
-  }
-  set(key, value, duration) {
-   if(this.cache[key]){
-    clearTimeout(this.cache[key].timer);
-    this.cache[key].value =value;
-    this.cache[key].timer = setTimeout(()=>{
-          console.log("after the" + duration/1000 + "second the key will expire"+ this.cache[key].value);
-          delete this.cache[key];
-    },duration);
-     return "key is set";
-   }
-   this.cache[key] ={
-    value:value,
-    timer:setTimeout(()=>{
-        console.log("this is a new key genrated for " + duration/1000 + "second" + this.cache[key].value);
-        delete this.cache[key];
-    },duration)
-   };
-   return "new key";
-  }
-
-  get(key) {
-    if (this.cache[key] && this.cache[key].timer) {
-      return this.cache[key].value;
-    }
-    else {
-      return "no key to show ";
-    }
-  }
-  display(key){
-    let status ="no";
-    if(this.cache[key] && this.cache[key].timer){
-        console.log(this.cache[key].value);
-        status = "yess sucesss !!!";
-    }
-    return status;
-  }
-  count() {
-    let ans = 0;
-    for (let key in this.cache) {
-      if (this.cache[key].timer) {
-        ans++;
-      }
-    }
-    return ans;
+class Node{
+  constructor(data){
+    this.data = data;
+    this.next = null;
   }
 }
-
-
-
-const timeLimitedCache = new TimeLimitedCache();
-console.log( timeLimitedCache.set(1, 42, 3000));
-// console.log(timeLimitedCache.get(1));
-console.log( timeLimitedCache.set(2, 112, 2000));
-// console.log(timeLimitedCache.get(2));
-console.log( timeLimitedCache.display(1));
+class Linkedlist {
+  constructor() {
+     this.head = null;
+  }
+  createLinklist(data){
+    let newnode = new Node(data);
+    return newnode;
+  }
+  add(data){
+    if(this.head==null){
+      this.head = this.createLinklist(data);
+    }
+    else{
+      let current = this.head;
+       let newnode = new Node(data);
+       while(current.next!=null){
+        current = current.next;
+       }
+       current.next = newnode;   
+      }
+  }
+  removeFromlast(){
+    if(this.head==null){
+      console.log("linked list is underflow");
+      return; 
+    }
+    else{
+      let current = this.head;
+      let temp;
+      while(current.next!=null){
+         temp = current;
+         current = current.next;
+      }
+      temp.next = null;
+    }
+  }
+  display(){
+    let current = this.head;
+    while(current!=null){
+      console.log(current.data);
+      current=current.next;
+    }
+  }
+  isPallindrom(){
+    let current = this.head;
+    let string ="";
+    while(current!=null){
+       string += current.data;
+      current = current.next;
+    }
+    const strRev =  [...string].reverse().join("");
+    if(string.match(strRev)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+}
+let ll = new Linkedlist();
+ll.add(1)
+ll.add(2)
+ll.add(2);
+ll.add(100);
+console.log(ll.isPallindrom());
+ll.display();
 
