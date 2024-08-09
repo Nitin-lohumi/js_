@@ -1,17 +1,9 @@
-/**
- * @param {Function} fn
- * @param {number} t milliseconds
- * @return {Function}
- */
-var debounce = function(fn, t) {
-  let excution;
-  return function(...args) { 
-      clearTimeout(excution);
-      excution=setTimeout(()=>fn(...args),t);
+var isEmpty = function(obj) {
+  let object = Object.keys(obj);
+  if(object.length>0){
+    return false;
   }
+  return true;
 };
- const log = debounce(console.log, 1000);
-  console.log(log(1));
-  console.log(log(2));
 
-
+console.log(isEmpty([null, false, 0]));
