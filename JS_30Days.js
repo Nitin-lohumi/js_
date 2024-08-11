@@ -1,10 +1,10 @@
-var chunk = function(arr, size) {
-  let arrchunk = [];
-    for(let i=0; i<arr.length; i = i+size){
-     arrchunk.push(arr.slice(i,i+size));
+Array.prototype.last = function() {
+   if(!this.length) return -1;
+    for(let i=0; i<this.length;i++){
+       return this[this.length-1];
     }
-    return arrchunk;
 };
-let arr =[1,2,3,4,5];
-let size =2;
-chunk(arr,size);
+
+  const arr = [null,{},3];
+  console.log(arr.last()); // 3
+ 
