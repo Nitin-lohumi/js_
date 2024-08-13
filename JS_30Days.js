@@ -1,42 +1,101 @@
-class RandomizedSet {
-   constructor() {
-      this.arr =[];
-   
-   }
-   insert(val) {
-    for(let i=0;i<this.arr.length; i++){
-      if(this.arr[i]===val){
-         return false;
-      }
+class Node {
+    constructor(elements){
+      this.elements =elements;
+      this.next = null;
     }
-     this.arr.push(val);
-     this.map.set(val,this.arr.length-1);
-     return true;
-   }
-   remove(val) {
-      if(this.arr.length==0){
-         return false;
+  }
+  class linkedlist {
+      constructor(){
+          this.head = null;
+          this.size =0;
       }
-      for(let i=0;i<=this.arr.length; i++){
-         if (this.arr[i]==val) {
-            this.arr.splice(i, 1);
-            this.map.delete(val);
-            return true;
+      add(elements){
+          let node = new Node(elements);
+          let current;
+          if(this.head==null){
+              this.head = node;
           }
+          else{
+              current = this.head;
+              while(this.current){
+                 current = current.next;
+              }
+              current.next = node;
+          }
+          this.size++;
+      }
+      insertAt(elements,index){
+          if(index<0||index>this.size){
+              return console.log("this is overflow or under flow sitution");
+          }
+          else{
+              let node  = new Node(elements);
+              let cur , prev;
+              cur = this.head;
+              if(index===0){
+                  node.next =this.head;
+                  this.head = node;
+              }
+              else{
+                  cur= this.head;
+                  let i=0;
+                  while(i<index){
+                   i++;
+                   prev= cur;
+                   cur = cur.next;
+                  }
+                  node.next = cur;
+                  prev.next = node;
+              }
+              this.size++;
+          }
+      }
+      remove(index){
+          if(index<0||index>this.size){
+              return console.log("this is not valid postions");
+          }
+          else{
+              let prev, curr,i=0;
+              curr = this.head;
+              prev = curr;
+              if(index==0){
+                  this.head = curr.next;
+              }
+              else{
+                  while(i<index){
+                     i++;
+                     prev = curr;
+                     curr= curr.next;
+                  }
+                  prev.next = curr.next;
+              }
+              this.size--;
+              return curr.elements;
+          }
+        
+      }
+      printList(list) {
+          while (list) {
+              console.log(list.elements)
+              list = list.next;
+          }
+      }
+      reverse(){
+        let temp = this.head;
+        let prev = null;
+        let point;
+        while(temp){
+            point= temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = point;
         }
-     return false;
-   }
-
-   getRandom = function() {
-      let randomnumber = this.arr[Math.floor(Math.random() * this.arr.length)];
-      return randomnumber;
-   };
-}
-let random = new RandomizedSet();
-console.log(random.arr);
-console.log(random.insert(3));
-console.log(random.insert(120));
-console.log(random.remove(3));
-console.log(random.map);
-
-
+      }
+  }
+  let linklist = new linkedlist();
+   linklist.add(20);
+  linklist.add(10);
+  linklist.reverse();
+  linklist.printList(linklist.head);
+  
+  
