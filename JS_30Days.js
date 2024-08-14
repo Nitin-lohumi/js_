@@ -1,37 +1,25 @@
-class Calculator {
-    constructor(value) {
-    this.init = value;
-    }
-    add(value){
-       this.init = value+this.init;
-       return this;
+var canCompleteCircuit = function(gas, cost) {
+   let curTank = 0, totalTank = 0, pos= 0;
+   for (let i=0;i<gas.length;i++) {
+       curTank+= gas[i] - cost[i];
+       totalTank+= gas[i] - cost[i];
+       if (curTank<0) {
+           curTank = 0;
+           pos = i+1;
+       }
+   }   
+   return totalTank<0?-1:pos;
+};
+let gas = [2,3,4]
+let cost = [3,4,3]
+console.log(canCompleteCircuit(gas,cost));
 
-    }
-    subtract(value){
-        this.init = this.init-value;
-        return this;
-    }
-    multiply(value) {
-       this.init = this.init* value;
-       return this;
-    }
-    divide(value) {
-       if(value==0){
-        throw new Error("Division by zero is not allowed");
-       }
-       else{
-        this.init = this.init/value;
-       }
-       return this;
-    }
-    power(value) {
-       this.init = Math.pow(this.init,value);
-       return this;
-    }
-    getResult() {
-        console.log(this.init);
-        return this.init;
-    }
-}
- let call =new Calculator(2);
- call.power(1).power(-3).getResult();
+const rotateArray1 = function(gas, ) {
+
+   for (let i = 0; i < k; i++) {
+       nums.unshift(nums.pop());
+   }
+ 
+   return nums;
+ }
+ 
