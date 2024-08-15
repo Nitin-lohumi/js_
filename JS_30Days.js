@@ -1,33 +1,17 @@
-
-const pairs = {
-    "(": ")",
-    "[": "]",
-    "{": "}"
-}
-var isValid = function(s) {
-    let stack =[];
-    if (s.lengt%2===1) {
-        return false;
-    }
-    if (s[0]==="]"||s[0]===")"||s[0]==="}") 
-      {
-        return false;
-      }
-    if (s[s.length-1]==="["||s[s.length-1]==="("||s[s.length-1]==="{"){
-        return false;
-    } 
-    for(let i=0; i<s.length; i++){
-        if(s[i]=='('||s[i]=='{'||s[i]=='['){
-            stack.push(s[i]);
-        }
-        else if (pairs[stack.pop()] !== s[i]) {
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
-    return;
+var flat = function (arr) {
+     let newarray = [];
+    //  if(n==0){
+    //     return arr;
+    //  }
+     for(let i=0; i<arr.length; i++){
+         if(typeof(arr[i])=='object'){
+           newarray.push(...flat(arr[i]));
+         }else{
+            newarray.push(arr[i]);
+         }
+     }
+     return newarray;
 };
-let s = "([)]";
-console.log(isValid(s));
+arr = [1,2,3,4,5,[4,5,67,7,88,9],[1,2,3,5,6,7,[8,2,3,45,6,7],345,6,7,8,9]];
+
+console.log(flat(arr));
