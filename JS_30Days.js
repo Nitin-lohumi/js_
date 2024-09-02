@@ -1,19 +1,30 @@
-var twoSum = function(numbers, target) {
-  let index =0;
-  let length = numbers.length-1;
-  while(index<length){
-   if(numbers[index]+numbers[length]==target){
-    return [index+1,length+1];
-   }
-   //beacuse they are in non-decreasing order;
-   else if(numbers[index]+numbers[length]<target){
-     index++;
-   }
-   else{
-    length--;
-   }
-  }   
-  return [];
+var threeSum = function (nums) {
+ let arr =[];
+ let numbers = nums.sort((a,b)=>a-b);
+ for(let i =0; i<numbers.length; i++){
+  if(i>0 && numbers[i]===numbers[i-1]){
+    continue;
+  }
+  let j = i+1;
+  let k = numbers.length-1;
+  while(j<k){
+    let total = numbers[i]+ numbers[j]+ numbers[k];
+    if(total>0){
+      k--;
+    }
+    else if(total<0){
+      j++;
+    }
+    else{
+      arr.push([numbers[i],numbers[j],numbers[k]]);
+      j++;
+      while(numbers[j]=== numbers[j-1] && j<k){
+        j++;
+      }
+    }
+
+  }
+ }
+return arr;
 };
-let numbers =[-10,-8,-2,1,2,5,6], target = 0;
-console.log(twoSum(numbers, target));
+console.log(threeSum([-1,0,1,2,-1,-4]));
