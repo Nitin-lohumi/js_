@@ -1,32 +1,28 @@
-var twoSum = function (numbers, target) {
-    let index =0;
-    let length = numbers.length-1;
-    while(index<length){
-        if(numbers[index]+numbers[length]==target){
-         return [index+1,length+1];
-        }
-        //beacuse they are in non-decreasing order;
-        else if(numbers[index]+numbers[length]<target){
-          index++;
-        }
-        else{
-         length--;
-        }
+var minSubArrayLen = function (target, nums) {
+  nums.sort();
+  let istrue = false;
+  for (let i of nums) {
+    if (i === target) {
+      istrue = true;
+      return 1;
     }
-  return 0;
+  }
+  let k =0;
+  let sum =0;
+  let min =Infinity;
+  if (!istrue) {
+    let i = 0;
+    let j = nums.length;
+    while (i < j) {
+     sum = sum + nums[i];
+     while(sum>=target){
+      min  = Math.min(min,(i-k+1));
+      sum = sum-nums[k];
+      k++;
+     }
+     i++;
+    }
+  }
+  return min ==Infinity?0:min;
 };
-let numbers =[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,1,1],
-target = 2;
-console.log(twoSum(numbers, target));
-
-// let count = 1;
-// for(let number in numbers){
-//   let index =count;
-//   while(index!=numbers.length){
-//     if(number+numbers[index]===target){
-//        return [Number(numbers.indexOf(number))+1,index+1];
-//     }
-//     index++;
-//   }
-//   count++;
-// }
+console.log(minSubArrayLen(11, [1,2,3,4,5]));
