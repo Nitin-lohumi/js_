@@ -1,28 +1,23 @@
-var minSubArrayLen = function (target, nums) {
-  nums.sort();
-  let istrue = false;
-  for (let i of nums) {
-    if (i === target) {
-      istrue = true;
-      return 1;
-    }
+var longestPalindrome = function(s) {
+  let string = s;
+  let value= 0;
+  let palindrom = "";
+  for(let i = 0; i < string.length; i++){
+      for(let j = 0; j <= 1; j++){
+          let left = i;
+          let right = i + j;
+          while(left >= 0 && right < string.length && s[left] === s[right]){
+              let len = right - left + 1;
+              if(len > value){
+                palindrom = s.substring(left, right + 1);
+                  value = len;
+              }
+              left--;
+              right++;
+          }
+      }
   }
-  let k =0;
-  let sum =0;
-  let min =Infinity;
-  if (!istrue) {
-    let i = 0;
-    let j = nums.length;
-    while (i < j) {
-     sum = sum + nums[i];
-     while(sum>=target){
-      min  = Math.min(min,(i-k+1));
-      sum = sum-nums[k];
-      k++;
-     }
-     i++;
-    }
-  }
-  return min ==Infinity?0:min;
+  return palindrom;
 };
-console.log(minSubArrayLen(11, [1,2,3,4,5]));
+let s = "babad";
+console.log(longestPalindrome(s));
