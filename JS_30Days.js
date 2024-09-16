@@ -1,17 +1,20 @@
-var isIsomorphic = function (s, t) {
-  let map1 = [];
-  let map2 = [];
-  if(s.length!==t.length) return false
-  for (let c = 0; c < s.length; c++) {
-   if(map1[s.charAt(c)]!=map2[t.charAt(c)]){
-    console.log(map1)
-    console.log(map2)
-    return false;
-   }
-   map1[s.charAt(c)] = c+1;
-   map2[t.charAt(c)] = c+1;
+var isHappy = function(n) {
+  if(n==1||n==7){
+    return true;
   }
-   return true
+  while(n>9){
+    let arr = n.toString().split("").map(Number);
+    let pow = arr.map((num)=>{
+      return Math.pow(num,2);
+    })
+    n = pow.reduce((pre,curr)=>{
+      return pre+curr;
+    }, 0);
+    if(n==1||n==7){
+      return true;
+    }
+  }
+  return false;
 };
-let s = "add", t = "eag";
-console.log(isIsomorphic(s, t));
+let n = 2;
+console.log(isHappy(n));
