@@ -1,23 +1,63 @@
-var longestPalindrome = function(s) {
-  let string = s;
-  let value= 0;
-  let palindrom = "";
-  for(let i = 0; i < string.length; i++){
-      for(let j = 0; j <= 1; j++){
-          let left = i;
-          let right = i + j;
-          while(left >= 0 && right < string.length && s[left] === s[right]){
-              let len = right - left + 1;
-              if(len > value){
-                palindrom = s.substring(left, right + 1);
-                  value = len;
-              }
-              left--;
-              right++;
-          }
-      }
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
   }
-  return palindrom;
-};
-let s = "babad";
-console.log(longestPalindrome(s));
+}
+class Bt {
+  constructor() {
+    this.root = null;
+  }
+  insert(data) {
+    let node = new Node(data);
+    if (this.root === null) {
+      this.root = node;
+    } else {
+      const search = (node) => {
+        if (data < node.val && node.left) {
+          search(node.left);
+        } else if (data < node.val) {
+          node.left = new Node(data);
+        } else if (data > node.val && node.right) {
+          search(node.right);
+        } else if (data > node.val) {
+          node.right = new Node(data);
+        }
+      };
+      return search(node);
+    }
+  }
+  find(data) {
+    if (this.root == null) {
+      return false;
+    }
+    let node = this.root;
+    let found = false;
+    while (node && !found) {
+      if (data > node.val) {
+        node = node.right;
+      } else if (data < node.val) {
+        node = node.left;
+      } else {
+        found = node;
+      }
+    }
+    return found ? true : false;
+  }
+  inorder(node) {
+    if (node !== null) {
+      this.inorder(node.left);
+      console.log(node.val);
+      this.inorder(node.right);
+    }
+  }
+}
+let tree = new Bt();
+tree.insert(10);
+tree.insert(20);
+tree.insert(30);
+tree.insert(40);
+tree.insert(50);
+tree.insert(1);
+tree.inorder(tree.root);

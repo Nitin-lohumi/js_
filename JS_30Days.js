@@ -1,57 +1,22 @@
-class Node {
-  constructor(data) {
-    this.data = data;
-    this.next = null;
-  }
+var wordPattern = function(pattern, s) {
+    let map = new Map()
+    let map1 = new Map()
+    let arr =s.split(' ');
+    for (let i = 0; i < pattern.length; ++i) {
+      if (map.has(pattern[i]) && arr[i] !== map.get(pattern[i])) {
+          return false;
+      } else {
+          map.set(pattern[i],arr[i]);
+      }
+  }  
+  for (let i = 0; i < arr.length; ++i) {
+    if (map1.has(arr[i]) && pattern[i] !== map1.get(arr[i])) {
+        return false;
+    } else {
+        map1.set(arr[i],pattern[i]);
+    }
 }
-class LinkedList {
-  constructor() {
-    this.head = null;
-  }
-  insert(data) {
-    let newnode = new Node(data);
-    if (this.head === null) {
-      this.head = newnode;
-      return;
-    }
-    let temp = this.head;
-    while (temp.next) {
-      temp = temp.next;
-    }
-    temp.next = newnode;
-  }
-  printList() {
-    let current = this.head;
-    while (current) {
-      console.log(current.data);
-      current = current.next;
-    }
-  }
-  delete(data){
-    if(this.head.data==data){
-        this.head =  this.head.next;
-        return;
-    }else{
-        let temp = this.head;
-        while(temp.next){
-            if(data===temp.next.data){
-             temp.next = temp.next.next;
-             return;
-            }
-            temp = temp.next;
-        }
-    }
-  }
-}
-
-let ll = new LinkedList();
-ll.insert(10);
-ll.insert(20);
-ll.insert(30);
-ll.insert(40);
-ll.insert(50);
-ll.insert(60);
-
-ll.delete(60);
-
-ll.printList();
+   return true
+};    
+let pattern = "abba", s ="dog dog dog dog"
+console.log(wordPattern(pattern,s));
