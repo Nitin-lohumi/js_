@@ -33,6 +33,32 @@ class BinaryTree{
       }
     }
   }
+   DeleteNode(node,data){
+       if(node==null){
+        return null
+       }
+       if(node.data<data){
+        node.left =this.DeleteNode(node.left,data);
+       }
+       else if(node.data>data){
+        node.right=  this.DeleteNode(node.right,data);
+       }
+       else{
+        if(node.left==null&&node.right==null){
+          return null;
+        }
+        if(node.left==null){
+          return node.right;
+        }
+        else if(node.right==null){
+          return node.left;
+        }
+        const sucesser = this.FindSmallestNode(node.right);
+        node.data = sucesser;
+        node.right = this.DeleteNode(node.right,sucesser);  
+       }
+       return node;
+   }
   inorder(node = this.root) {
     let arr = [];
      function inorderfun(root){
@@ -61,15 +87,12 @@ class BinaryTree{
       console.log(node.data);
     }
   }
-  FindSmallestNode(node=this.root){
-    if(this.root==null){
-      return null;
+  FindSmallestNode(node) {
+    while (node && node.left !== null) {
+        node = node.left;
     }
-    if(!node.left){
-      return node.data;
-    }
-    return this.FindSmallestNode(node.left);
-  }
+    return node;
+}
   findLargest(node = this.root){
     if(this.root == null){
       return null;
@@ -78,18 +101,19 @@ class BinaryTree{
       node = node.right;
     }
     return node.data;
-   
   }
 }
 let tree = new BinaryTree();
 tree.insert(40);
 tree.insert(20);
 tree.insert(10)
-tree.insert(60);
-tree.insert(50);
-tree.insert(100);
-tree.insert(90);
 
 console.log("this is the smallest node "+ tree.FindSmallestNode());
 console.log("this is the largest node "+ tree.findLargest());
 tree.inorder();
+
+tree.root = tree.DeleteNode(tree.root,40);
+
+console.log("this is the after delete node ");
+tree.preorder(tree.root);
+// console.log(tree.root)
