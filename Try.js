@@ -61,14 +61,35 @@ class BinaryTree{
       console.log(node.data);
     }
   }
+  FindSmallestNode(node=this.root){
+    if(this.root==null){
+      return null;
+    }
+    if(!node.left){
+      return node.data;
+    }
+    return this.FindSmallestNode(node.left);
+  }
+  findLargest(node = this.root){
+    if(this.root == null){
+      return null;
+    }
+    while(node.right!==null){
+      node = node.right;
+    }
+    return node.data;
+   
+  }
 }
 let tree = new BinaryTree();
 tree.insert(40);
 tree.insert(20);
+tree.insert(10)
 tree.insert(60);
-console.log("this is Inorder");
+tree.insert(50);
+tree.insert(100);
+tree.insert(90);
+
+console.log("this is the smallest node "+ tree.FindSmallestNode());
+console.log("this is the largest node "+ tree.findLargest());
 tree.inorder();
-console.log("this is preorder");
-tree.preorder();
-console.log("this is postoreder");
-tree.postorder()
