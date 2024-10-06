@@ -1,14 +1,10 @@
-var reverse = function(x) {
-const MAX_INT = 2**31-1
-const MIN_INT = -(2**31);
-let reverse =0;
-const sign = x<0?-1:1;
-x = Math.abs(x)
-reverse = parseInt(x.toString().split('').reverse().join(''));
-reverse =reverse*sign;
-if(reverse<MIN_INT||reverse>MAX_INT){
-  return 0;
-}
-return reverse;
+var myAtoi = function(s) {
+    const answer = Number.parseInt(s);
+    if(answer){
+      if (answer <= -2147483648) return -2147483648;
+      else if (answer >= 2147483647) return 2147483647;
+      else return answer;
+    }
+    return answer;
 };
-console.log(reverse(1534236469))
+console.log(myAtoi("0-1"));
