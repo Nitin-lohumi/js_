@@ -23,7 +23,7 @@ class LinkedList {
     this.size++;
   }
 
-  deleteDuplicates = function (head) {
+deleteDuplicates = function (head) {
     if (head == null) {
       return head;
     } else {

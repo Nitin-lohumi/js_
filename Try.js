@@ -1,10 +1,36 @@
-var myAtoi = function(s) {
-    const answer = Number.parseInt(s);
-    if(answer){
-      if (answer <= -2147483648) return -2147483648;
-      else if (answer >= 2147483647) return 2147483647;
-      else return answer;
+var letterCombinations = function (digits) {
+  const keypad = new Map([
+    ["2", "abc"],
+    ["3", "def"],
+    ["4", "ghi"],
+    ["5", "jkl"],
+    ["6", "mno"],
+    ["7", "pqrs"],
+    ["8", "tuv"],
+    ["9", "wxyz"],
+  ]);
+  const combinate = [];
+  const arr = digits.split("");
+  arr.map((v) => {
+    if (keypad.has(v)) {
+      combinate.push(keypad.get(v));
     }
-    return answer;
+  });
+  return combine(combinate);
 };
-console.log(myAtoi("0-1"));
+
+function combine(group) {
+  if(group.length<=1) return group.join("").split("");
+  const first_group = group[0];
+  const restgroup = combine(group.slice(1));
+  let store = [];
+  for (let char of first_group) {
+    for (let rest of restgroup) {
+      store.push(char + rest);
+    }
+  }
+  console.log(store.length);
+  return store;
+}
+
+console.log(letterCombinations("3"));
