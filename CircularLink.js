@@ -68,10 +68,21 @@ class circularLinkList{
             }
         }
     }
+      isPalindrome = function() {
+        let Str = "";
+        while(this.head!=null)
+        {
+          Str = Str+this.head.data;
+          this.head= this.head.next;
+        }
+        return Str.split("").reverse().join('').match(Str)?true:false;
+      };
 }
 
 let cl = new circularLinkList();
-cl.insert(10);
-cl.insert(20);
-cl.delete(1);
+cl.insert(1);
+cl.insert(2);
+cl.insert(2);
+cl.insert(1);
 cl.print();
+console.log(cl.isPalindrome());

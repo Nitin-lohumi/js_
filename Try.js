@@ -1,36 +1,23 @@
-var letterCombinations = function (digits) {
-  const keypad = new Map([
-    ["2", "abc"],
-    ["3", "def"],
-    ["4", "ghi"],
-    ["5", "jkl"],
-    ["6", "mno"],
-    ["7", "pqrs"],
-    ["8", "tuv"],
-    ["9", "wxyz"],
-  ]);
-  const combinate = [];
-  const arr = digits.split("");
-  arr.map((v) => {
-    if (keypad.has(v)) {
-      combinate.push(keypad.get(v));
-    }
-  });
-  return combine(combinate);
-};
-
-function combine(group) {
-  if(group.length<=1) return group.join("").split("");
-  const first_group = group[0];
-  const restgroup = combine(group.slice(1));
-  let store = [];
-  for (let char of first_group) {
-    for (let rest of restgroup) {
-      store.push(char + rest);
-    }
+var divide = function(dividend, divisor) {
+  if(dividend== -2147483648 &&divisor==-1) return  -2147483648 ;
+  let quosient = 0;
+  let ispositive =1;
+  if(dividend<0){
+    ispositive =-1;
+    dividend = -dividend;
   }
-  console.log(store.length);
-  return store;
-}
+  if(divisor<0){
+    ispositive =-1;
+    divisor =-divisor;
+  }
 
-console.log(letterCombinations("3"));
+  if(dividend==divisor) return ispositive;
+
+  for(let i = 0, val = divisor; dividend >= divisor; i = 0, val = divisor){
+    while (val > 0 && val <= dividend) val = divisor << ++i;
+    dividend -= divisor << (i - 1);
+    quosient += 1 << (i - 1);
+  }
+  return ispositive < 0 ? -quosient : quosient;
+};
+console.log(divide(10,-3));
