@@ -1,23 +1,21 @@
-var divide = function(dividend, divisor) {
-  if(dividend== -2147483648 &&divisor==-1) return  -2147483648 ;
-  let quosient = 0;
-  let ispositive =1;
-  if(dividend<0){
-    ispositive =-1;
-    dividend = -dividend;
+var isAnagram = function (s, t) {
+  if (s.length !== t.length) {
+    return false;
   }
-  if(divisor<0){
-    ispositive =-1;
-    divisor =-divisor;
+  let res = 0;
+  let Str =s;
+  for (let i = 0; i < s.length; i++) {
+    let index = Str.indexOf(t[i]); 
+    if(index!=-1){
+     if(s.includes(t[i])){
+      res++;
+      Str =Str.replace(t[i],"");
+      // console.log(Str);
+     }
+    }
   }
-
-  if(dividend==divisor) return ispositive;
-
-  for(let i = 0, val = divisor; dividend >= divisor; i = 0, val = divisor){
-    while (val > 0 && val <= dividend) val = divisor << ++i;
-    dividend -= divisor << (i - 1);
-    quosient += 1 << (i - 1);
-  }
-  return ispositive < 0 ? -quosient : quosient;
+  // console.log(res)
+  // console.log(s.length)
+  return res == s.length;
 };
-console.log(divide(10,-3));
+console.log(isAnagram("anagram", "nagaram"));
