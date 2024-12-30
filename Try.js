@@ -1,21 +1,8 @@
-var isAnagram = function (s, t) {
-  if (s.length !== t.length) {
-    return false;
+var areOccurrencesEqual = function(s) {
+   let map = new Map();  
+   for (let char of s) {
+    map.set(char, (map.get(char) || 0) + 1);
   }
-  let res = 0;
-  let Str =s;
-  for (let i = 0; i < s.length; i++) {
-    let index = Str.indexOf(t[i]); 
-    if(index!=-1){
-     if(s.includes(t[i])){
-      res++;
-      Str =Str.replace(t[i],"");
-      // console.log(Str);
-     }
-    }
-  }
-  // console.log(res)
-  // console.log(s.length)
-  return res == s.length;
+   return new Set(map.values()).size === 1;
 };
-console.log(isAnagram("anagram", "nagaram"));
+console.log(areOccurrencesEqual("abacbc"));
