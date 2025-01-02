@@ -1,8 +1,16 @@
-var areOccurrencesEqual = function(s) {
-   let map = new Map();  
-   for (let char of s) {
-    map.set(char, (map.get(char) || 0) + 1);
-  }
-   return new Set(map.values()).size === 1;
+var checkIfInstanceOf = function(obj, classFunction) {
+//     while (obj!=null) {
+//       console.log(obj.constructor);
+//       console.log(classFunction);
+//        if(obj.constructor==classFunction){
+//             return true;
+//        }
+//        obj = Object.getPrototypeOf(obj);
+//     }
+//     return false;
+      if (typeof obj !== "object" && typeof obj !== "function") {
+            obj = Object(obj);
+      }
+console.log(obj instanceof classFunction);
 };
-console.log(areOccurrencesEqual("abacbc"));
+console.log(checkIfInstanceOf(5, Number));
