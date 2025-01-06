@@ -1,16 +1,16 @@
-var checkIfInstanceOf = function(obj, classFunction) {
-//     while (obj!=null) {
-//       console.log(obj.constructor);
-//       console.log(classFunction);
-//        if(obj.constructor==classFunction){
-//             return true;
-//        }
-//        obj = Object.getPrototypeOf(obj);
-//     }
-//     return false;
-      if (typeof obj !== "object" && typeof obj !== "function") {
-            obj = Object(obj);
-      }
-console.log(obj instanceof classFunction);
+var countKDifference = function(nums, k) {
+  const obj ={};
+  let count =0;
+  for(let n of nums){
+    if(obj[n-k]){
+      count=count+obj[n-k];
+    }
+    if(obj[n+k]){
+      count=count+obj[n+k];
+    }
+    obj[n]= ((obj[n]||0)+1);
+    console.log(obj)
+  }
+   return count;
 };
-console.log(checkIfInstanceOf(5, Number));
+console.log(countKDifference([1,2,2,1],1))//2-1=1
