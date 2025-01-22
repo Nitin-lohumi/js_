@@ -1,12 +1,15 @@
-var generate = function (numRows) {
-  let arr = [];
-  for (let i = 0; i < numRows; i++) {
-    arr.push(Array(i + 1).fill(1));
-    for (let j = 1; j < i; j++) {
-      arr[i][j] = arr[i - 1][j - 1] + arr[i - 1][j];
+var convert = function (s, numRows) {
+  if (numRows === 1 || s.length <= numRows) return s;
+  let count =0
+  let rev = false;
+  let arr = Array.from({ length: numRows }, () => "");
+  for(let char  of s){
+    arr[count] +=char;
+    if (count === 0 || count === numRows - 1) {
+      rev = !rev;
     }
+    count=count + ((!rev)?-1:1);
   }
-  return arr;
+  return arr.join("");
 };
-
-console.log(generate(5));
+console.log(convert("PAYPALISHIRING", 3));
