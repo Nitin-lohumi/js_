@@ -1,15 +1,33 @@
-var convert = function (s, numRows) {
-  if (numRows === 1 || s.length <= numRows) return s;
-  let count =0
-  let rev = false;
-  let arr = Array.from({ length: numRows }, () => "");
-  for(let char  of s){
-    arr[count] +=char;
-    if (count === 0 || count === numRows - 1) {
-      rev = !rev;
-    }
-    count=count + ((!rev)?-1:1);
+var exist = function(board, word) {
+  let m = board.length;
+  let n = board[0].length;
+  let visited = Array.from({ length: m }, () => Array(n).fill(false));
+
+  const dfsCall = (x, y, wordPosition) => {
+      if (wordPosition === word.length) return true; 
+      if (x < 0 || x >= m || y < 0 || y >= n || visited[x][y] || board[x][y] !== word[wordPosition]) {
+          return false;
+      }
+      visited[x][y] = true;
+      const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+      for (let [dx, dy] of directions) {
+          if (dfsCall(x + dx, y + dy, wordPosition + 1)) {
+              return true; 
+          }
+      }
+      visited[x][y] = false;
+      return false;
+  };
+
+  for (let i = 0; i < m; i++) {
+      for (let j = 0; j < n; j++) {
+          if (dfsCall(i, j, 0)) {
+              return true;
+          }
+      }
   }
-  return arr.join("");
+
+  return false;
 };
-console.log(convert("PAYPALISHIRING", 3));
+
+console.log(exist([["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]], "ABCCED")); // Output: true
