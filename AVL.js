@@ -172,5 +172,5 @@ tree.display();
 
 tree.deleteValue(20);
 
-console.log("hiiiiiiiiiiiiiiiiii")
+console.log("")
 tree.display();
