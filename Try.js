@@ -1,26 +1,27 @@
-var compress = function (chars) {
-  if(chars.length ==0){
-    return chars;
+var nextPermutation = function (nums) {
+  if (nums.length == 1) {
+    return nums;
   }
-  let str1 ="";
-  let i=0;
-  while (i<chars.length) {
-    let char = chars[i];
-    let c =0;
-    while (i < chars.length && chars[i] === char) {
-      i++;
-      c++;
-    }
-    if(c>1){
-      str1 = str1+char+c;
-    }else{
-      str1 =str1+char; 
-    }
+  let i =nums.length-2;
+  let j = nums.length - 1;
+  while(i>=0 &&nums[i]>=nums[i+1]){
+    i--;
   }
-  chars.length = 0;
-  chars.push(...str1.split(""));
-  return str1.length;
+  if(i>=0){
+    let j = nums.length-1;
+    while (nums[j]<=nums[i]) {
+        j--;
+    }
+    [nums[i], nums[j]] = [nums[j], nums[i]];
+  }
+  let left = i+1;
+  let right = nums.length-1;
+  while(left<right){
+    [nums[left], nums[right]] = [nums[right], nums[left]];
+    left++;
+    right--;
+  }
 };
-let chars =["a"];
-console.log(compress(chars)); 
-console.log(chars); 
+let arr =[1,3,2];
+nextPermutation(arr);
+console.log(arr);
