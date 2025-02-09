@@ -1,27 +1,26 @@
-var nextPermutation = function (nums) {
-  if (nums.length == 1) {
-    return nums;
-  }
-  let i =nums.length-2;
-  let j = nums.length - 1;
-  while(i>=0 &&nums[i]>=nums[i+1]){
-    i--;
-  }
-  if(i>=0){
-    let j = nums.length-1;
-    while (nums[j]<=nums[i]) {
-        j--;
+class Solution {
+  constructor(nums) {
+    this.nums = nums;
+    this.map = new Map();
+    for (let i = 0; i < this.nums.length; i++) {
+      if (!this.map.has(this.nums[i])) {
+        this.map.set(this.nums[i], []);
+      }
+      this.map.get(this.nums[i]).push(i);
     }
-    [nums[i], nums[j]] = [nums[j], nums[i]];
   }
-  let left = i+1;
-  let right = nums.length-1;
-  while(left<right){
-    [nums[left], nums[right]] = [nums[right], nums[left]];
-    left++;
-    right--;
+
+  pick(target) {
+    if (this.map.has(target)) {
+      let targetIndices = this.map.get(target);
+      const randomIndex = Math.floor(Math.random() * targetIndices.length);
+      return targetIndices[randomIndex];
+    }
+    return null;
   }
-};
-let arr =[1,3,2];
-nextPermutation(arr);
-console.log(arr);
+}
+
+let nums = [1, 2, 3, 3, 3];
+var obj = new Solution(nums);
+var param_1 = obj.pick(3);
+console.log(param_1);
