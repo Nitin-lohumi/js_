@@ -1,93 +1,106 @@
 class Node {
-  constructor(elements){
-    this.elements =elements;
+  constructor(value) {
+    this.value = value;
     this.next = null;
   }
 }
-class linkedlist {
-    constructor(){
-        this.head = null;
-        this.size =0;
-    }
-    add(elements){
-        let node = new Node(elements);
-        let current;
-        if(this.head==null){
-            this.head = node;
-        }
-        else{
-            current = this.head;
-            while(this.current){
-               current = current.next;
-            }
-            current.next = node;
-        }
-        this.size++;
-    }
-    insertAt(elements,index){
-        if(index<0||index>this.size){
-            return console.log("this is overflow or under flow sitution");
-        }
-        else{
-            let node  = new Node(elements);
-            let cur , prev;
-            cur = this.head;
-            if(index===0){
-                node.next =this.head;
-                this.head = node;
-            }
-            else{
-                cur= this.head;
-                let i=0;
-                while(i<index){
-                 i++;
-                 prev= cur;
-                 cur = cur.next;
-                }
-                node.next = cur;
-                prev.next = node;
-            }
-            this.size++;
-        }
-    }
-    remove(index){
-        if(index<0||index>this.size){
-            return console.log("this is not valid postions");
-        }
-        else{
-            let prev, curr,i=0;
-            curr = this.head;
-            prev = curr;
-            if(index==0){
-                this.head = curr.next;
-            }
-            else{
-                while(i<index){
-                   i++;
-                   prev = curr;
-                   curr= curr.next;
-                }
-                prev.next = curr.next;
-            }
-            this.size--;
-            return curr.elements;
-        }
-      
-    }
-    printList() {
-        var curr = this.head;
-        var str = "";
-        while (curr) {
-            str += curr.elements + " ";
-            curr = curr.next;
-        }
-        console.log(str);
-    }
-}
-let linklist = new linkedlist();
-linklist.add(10);
-linklist.add(20);
-linklist.insertAt(100,1);
-linklist.remove(0);
-console.log(linklist.printList());
 
+class SinglyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+
+  // Insert at the end
+  append(value) {
+    const newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
+    this.length++;
+  }
+
+  // Insert at the beginning
+  prepend(value) {
+    const newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+  }
+
+  // Delete a node by value
+  delete(value) {
+    if (!this.head) return;
+
+    if (this.head.value === value) {
+      this.head = this.head.next;
+      this.length--;
+      return;
+    }
+
+    let current = this.head;
+    while (current.next && current.next.value !== value) {
+      current = current.next;
+    }
+
+    if (current.next) {
+      current.next = current.next.next;
+      if (!current.next) {
+        this.tail = current; // Update tail if last node is removed
+      }
+      this.length--;
+    }
+  }
+
+  // Print the list
+  print(head) {
+    let current = head;
+    let result = "";
+    while (current) {
+      result += current.value + " -> ";
+      current = current.next;
+    }
+    console.log(result + "null");
+  }
+  deleteDuplicates() {
+    let temp = this.head;
+    let prev = temp;
+    let curr = this.head.next;
+    while (curr.next != null) {
+      while (curr.value == curr.next.value && curr.next != null) {
+        curr = curr.next;
+      }
+      if (prev.next == curr) {
+        prev = prev.next;
+      } else {
+        prev.next = curr.next;
+      }
+      curr = curr.next;
+    }
+    return temp.next;
+  }
+
+  sortList() {
+   let temp = this.head;
+   
+  };
+}
+
+const list = new SinglyLinkedList();
+list.append(0);
+list.append(4);
+list.append(2);
+list.append(1);
+list.append(3);
+const head = list.sortList();
+list.print(head);

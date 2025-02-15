@@ -1,26 +1,11 @@
-class Solution {
-  constructor(nums) {
-    this.nums = nums;
-    this.map = new Map();
-    for (let i = 0; i < this.nums.length; i++) {
-      if (!this.map.has(this.nums[i])) {
-        this.map.set(this.nums[i], []);
-      }
-      this.map.get(this.nums[i]).push(i);
-    }
+var isPowerOfFour = function (n) {
+  if (n == 1) {
+    return true;
   }
-
-  pick(target) {
-    if (this.map.has(target)) {
-      let targetIndices = this.map.get(target);
-      const randomIndex = Math.floor(Math.random() * targetIndices.length);
-      return targetIndices[randomIndex];
-    }
-    return null;
+  if(n==0){
+    return false;
   }
-}
-
-let nums = [1, 2, 3, 3, 3];
-var obj = new Solution(nums);
-var param_1 = obj.pick(3);
-console.log(param_1);
+  n = n/4;
+  return isPowerOfFour(n);
+};
+console.log(isPowerOfFour(6));
