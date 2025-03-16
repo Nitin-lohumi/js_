@@ -1,20 +1,18 @@
-var pivotArray = function (nums, pivot) {
-  let res = [];
+var majorityElement = function (nums) {
+  let MapNumber = new Map();
   for (let i = 0; i < nums.length; i++) {
-     if(nums[i]<pivot){
-        res.push(nums[i]);
-     }
-  }
-  for (let i = 0; i < nums.length; i++) {
-    if(nums[i]==pivot){
-        res.push(pivot);
+    if (MapNumber.has(nums[i])) {
+      MapNumber.set(nums[i], MapNumber.get(nums[i]) + 1);
+    } else {
+      MapNumber.set(nums[i], 1);
     }
   }
-  for (let i = 0; i < nums.length; i++) {
-    if(nums[i]>pivot){
-        res.push(nums[i]);
+  let maxNumbers = [];
+  for (const [number, freq] of MapNumber.entries()) {
+    if (freq > Math.floor(nums.length/3)) {
+      maxNumbers.push(number);
     }
   }
-  return res;
+  return maxNumbers;
 };
-console.log(pivotArray([9, 12, 5, 10, 14, 3, 10], 10));
+console.log(majorityElement([1,2,3]));
